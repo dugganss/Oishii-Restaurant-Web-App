@@ -1,4 +1,7 @@
-﻿namespace CO5227_Assignment.wwwroot.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CO5227_Assignment.wwwroot.Models
 {
 
     public enum Category
@@ -39,8 +42,8 @@
         [Required]
         public Diet dietryRequirements { get; set; }
         
-        [Key, StringLength(5), Required]
-        public string storeID { get; set; }
+        //[StringLength(5), Required]
+        //public string storeID { get; set; }
 
         public bool special { get; set; }
 
