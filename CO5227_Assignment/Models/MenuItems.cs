@@ -42,8 +42,8 @@ namespace CO5227_Assignment.wwwroot.Models
         [Required]
         public Diet dietryRequirements { get; set; }
         
-        //[StringLength(5), Required]
-        //public string storeID { get; set; }
+        [StringLength(5), Required]
+        public string storeID { get; set; }
 
         public bool special { get; set; }
 

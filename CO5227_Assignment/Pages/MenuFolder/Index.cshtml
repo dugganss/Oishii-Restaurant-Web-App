@@ -32,6 +32,9 @@
                 @Html.DisplayNameFor(model => model.MenuItems[0].dietryRequirements)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.MenuItems[0].storeID)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.MenuItems[0].special)
             </th>
             <th></th>
@@ -57,6 +60,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dietryRequirements)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.storeID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.special)
