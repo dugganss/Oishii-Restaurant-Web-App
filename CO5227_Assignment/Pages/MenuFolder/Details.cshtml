@@ -1,0 +1,61 @@
+﻿@page
+@model CO5227_Assignment.Pages.MenuFolder.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MenuItems</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.itemName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.itemName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.allergens)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.allergens)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.dietryRequirements)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.dietryRequirements)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MenuItems.special)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MenuItems.special)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.MenuItems?.itemID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
