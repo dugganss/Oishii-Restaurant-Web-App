@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using CO5227_Assignment.Data;
 
 namespace CO5227_Assignment.Pages
 {
@@ -11,6 +12,7 @@ namespace CO5227_Assignment.Pages
             _logger = logger;
         }
 
+        private readonly CO5227_AssignmentContext _db;
         public void OnGet()
         {
 

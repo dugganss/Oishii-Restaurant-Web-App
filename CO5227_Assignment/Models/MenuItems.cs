@@ -6,12 +6,12 @@ namespace CO5227_Assignment.wwwroot.Models
 
     public enum Category
     {
-        Maki, Nigiri, Sashimi, Uramaki, Onigiri
+        Maki, Nigiri, Sashimi, Uramaki, Platter, Bento
     }
 
     public enum Allergens
     {
-        Gluten, Milk, Nuts, Fish, Egg, Sesame
+        Gluten, Milk, Nuts, Fish, Egg, Sesame, None
     }
 
     public enum Diet
@@ -36,6 +36,7 @@ namespace CO5227_Assignment.wwwroot.Models
         [Required]
         public Category category { get; set; }
         
+        //todo: change from enum so items can have multiple allergens
         [Required]
         public Allergens allergens { get; set; }
         

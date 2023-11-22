@@ -32,6 +32,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<CO5227_AssignmentContext>();
     
     context.Database.EnsureCreated();
+    DbInit.Initialise(context);
 }
 
 
