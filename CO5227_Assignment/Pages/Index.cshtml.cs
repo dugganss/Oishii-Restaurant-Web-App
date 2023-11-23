@@ -8,17 +8,19 @@ namespace CO5227_Assignment.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
-
         private readonly CO5227_AssignmentContext _context;
 
-        public IndexModel(CO5227_AssignmentContext context) {
-        _context = context;
+        public IndexModel(ILogger<IndexModel> logger, CO5227_AssignmentContext context)
+        {
+            _logger = logger;
+            _context = context;
         }
+
+        //private readonly CO5227_AssignmentContext _context;
+
+        //public IndexModel(CO5227_AssignmentContext context) {
+        //_context = context;
+        //}
 
         public IList<MenuItems> MenuItem { get; set; } = default!;
         public void OnGet()
