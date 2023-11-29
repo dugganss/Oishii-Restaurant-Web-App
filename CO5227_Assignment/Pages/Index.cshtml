@@ -142,6 +142,37 @@
         </div>
     </div>
 
+    <div class="text-center">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var tblMenuItems in Model.MenuItem)
+                {
+                    <tr>
+                        <td>@tblMenuItems.itemID</td>
+                        <td>@tblMenuItems.itemName</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+    <div class="d-flex p-3 bg-black text-white">
+        @foreach (var tblMenuItems in Model.MenuItem)
+        {
+            <div>
+                <p class="p-3">@Html.DisplayFor(modelItem => tblMenuItems.itemName)</p>
+            </div>
+        }
+    </div>
+
 
     
 

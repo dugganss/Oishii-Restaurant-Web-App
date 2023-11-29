@@ -21,6 +21,7 @@ namespace CO5227_Assignment.wwwroot.Models
 
     public class MenuItems
     {
+
         [Required, StringLength(5), Key]
         public string itemID { get; set; }
         
@@ -43,10 +44,14 @@ namespace CO5227_Assignment.wwwroot.Models
         [Required]
         public Diet dietryRequirements { get; set; }
         
-        [StringLength(5), Required]
+        [Required, StringLength(3)]
         public string storeID { get; set; }
 
         public bool special { get; set; }
+
+        public string imgDescription { get; set; }
+
+        public byte[] imgData { get; set; }
 
 
 
