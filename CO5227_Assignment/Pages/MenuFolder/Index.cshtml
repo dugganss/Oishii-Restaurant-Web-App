@@ -5,71 +5,53 @@
     ViewData["Title"] = "Index";
 }
 
+<ul class="list-group list-group-horizontal list-unstyled">
+    <li>
+        <div class="p-5 m-5"></div>
+    </li>
+<li>
 <div class="text-center p-5">
     <h1 class="display-5">Menu</h1>
-
-
 <p>
     <a asp-page="Create">Create New</a>
 </p>
 
-<table class="table">
+<table class="table table-borderless p-5 w-auto">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].itemName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].allergens)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].dietryRequirements)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].storeID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MenuItems[0].special)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.MenuItems) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.itemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.allergens)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dietryRequirements)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.storeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.special)
-            </td>
+                <tr>
+                    @{
+                        try
+                        {
+                            <div class="container">
+                                <div class ="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
+                                    <td>
+                                            <a asp-page="./Details" asp-route-id="@item.itemID">
+                                            <img class="img-fluid " src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.imgData))" alt="@item.imgDescription" />
+                                        </a>
+                                        
+                                    </td>
+                                </div>
+                            </div>
+                        }
+                        catch
+                        {
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.itemID">
+                                <img class="img-fluid" src="~/img/noimg.png" alt="No image found" />
+                            </a>
+                        </td>
+                        
+                        }
+                    }
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.itemID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.itemID">Details</a> |
@@ -80,3 +62,8 @@
     </tbody>
 </table>
 </div>
+    </li>
+    <li>
+        <div class="p-5 m-5"></div>
+    </li>
+</ul>
