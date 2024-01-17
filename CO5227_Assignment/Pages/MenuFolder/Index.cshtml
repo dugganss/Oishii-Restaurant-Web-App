@@ -5,65 +5,43 @@
     ViewData["Title"] = "Index";
 }
 
-<ul class="list-group list-group-horizontal list-unstyled">
-    <li>
-        <div class="p-5 m-5"></div>
-    </li>
-<li>
-<div class="text-center p-5">
-    <h1 class="display-5">Menu</h1>
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 
-<table class="table table-borderless p-5 w-auto">
-    <thead>
-        <tr>
-            <th>
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.MenuItems) {
-                <tr>
-                    @{
-                        try
-                        {
-                            <div class="container">
-                                <div class ="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
-                                    <td>
-                                            <a asp-page="./Details" asp-route-id="@item.itemID">
-                                            <img class="img-fluid " src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.imgData))" alt="@item.imgDescription" />
-                                        </a>
-                                        
-                                    </td>
-                                </div>
-                            </div>
-                        }
-                        catch
-                        {
-                        <td>
-                            <a asp-page="./Details" asp-route-id="@item.itemID">
-                                <img class="img-fluid" src="~/img/noimg.png" alt="No image found" />
-                            </a>
-                        </td>
-                        
-                        }
-                    }
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.itemID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.itemID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.itemID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="text-center p-5">
+    <h1 class="display-5">Administrator Menu</h1>
+
+    <p class="py-3">
+        <a asp-page="Create"><button>Create New Item</button></a>
+    </p>
+
+    <div class="container">
+        @for (int i = 0; i < Model.MenuItems.Count; i += 2)
+        {
+            <div class="row mb-4">
+                @for (int j = i; j < i + 2 && j < Model.MenuItems.Count; j++)
+                {
+                    var item = Model.MenuItems[j];
+
+                    <div class="col-md-6 text-center">
+                        <a asp-page="./Details" asp-route-id="@item.itemID">
+                            @{
+                                try
+                                {
+                                    <img class="img-fluid py-4" src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.imgData))" alt="@item.imgDescription" />
+                                }
+                                catch
+                                {
+                                    <img class="img-fluid" src="~/img/noimg.png" alt="No image found" />
+                                }
+                            }
+                        </a>
+                        <div>
+                            <a asp-page="./Edit" asp-route-id="@item.itemID"><button>Edit</button></a> |
+                            <a asp-page="./Details" asp-route-id="@item.itemID"><button>Details</button></a> |
+                            <a asp-page="./Delete" asp-route-id="@item.itemID"><button>Delete</button></a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
-    </li>
-    <li>
-        <div class="p-5 m-5"></div>
-    </li>
-</ul>
