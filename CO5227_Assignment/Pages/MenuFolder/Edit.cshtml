@@ -1,19 +1,24 @@
 ﻿@page
+@using CO5227_Assignment.wwwroot.Models
 @model CO5227_Assignment.Pages.MenuFolder.EditModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center">Edit existing item</h1>
 
-<h4>MenuItems</h4>
 <hr />
-<div class="row">
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MenuItems.itemID" />
+            <div class="form-group">
+                <label asp-for="MenuItems.storeID" class="control-label"></label>
+                <input asp-for="MenuItems.storeID" class="form-control" />
+                <span asp-validation-for="MenuItems.storeID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="MenuItems.itemName" class="control-label"></label>
                 <input asp-for="MenuItems.itemName" class="form-control" />
@@ -31,39 +36,51 @@
             </div>
             <div class="form-group">
                 <label asp-for="MenuItems.category" class="control-label"></label>
-                <select asp-for="MenuItems.category" class="form-control"></select>
+                <select asp-for="MenuItems.category" asp-items="Html.GetEnumSelectList<Category>()" class="form-control"></select>
                 <span asp-validation-for="MenuItems.category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MenuItems.allergens" class="control-label"></label>
-                <select asp-for="MenuItems.allergens" class="form-control"></select>
+                <select asp-for="MenuItems.allergens" asp-items="Html.GetEnumSelectList<Allergens>()" class="form-control"></select>
                 <span asp-validation-for="MenuItems.allergens" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MenuItems.dietryRequirements" class="control-label"></label>
-                <select asp-for="MenuItems.dietryRequirements" class="form-control"></select>
+                <select asp-for="MenuItems.dietryRequirements" asp-items="Html.GetEnumSelectList<Diet>()" class="form-control"></select>
                 <span asp-validation-for="MenuItems.dietryRequirements" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MenuItems.storeID" class="control-label"></label>
-                <select asp-for="MenuItems.storeID" class="form-control"></select>
-                <span asp-validation-for="MenuItems.storeID" class="text-danger"></span>
-            </div>
+            
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="MenuItems.special" /> @Html.DisplayNameFor(model => model.MenuItems.special)
                 </label>
             </div>
             <div class="form-group">
+                <label asp-for="MenuItems.imgDescription" class="control-label text-danger">Image Description (Alt Text)</label>
+                <input asp-for="MenuItems.imgDescription" class="form-control" />
+            </div>
+
+            <div class="form-group p-3">
+                <label asp-for="MenuItems.imgData" class="control-label text-danger">Image Upload</label>
+
+                <input type="file" id="file1"
+                       name="file1"
+                       multiple="multiple" />
+            </div>
+            <h3 class="text-black fw-bold">CANNOT EDIT IMAGES IN CURRENT STATE</h3>
+
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <a asp-page="./Index"><button class ="my-4">Back to menu list</button></a>
     </div>
+
+    
+
+
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

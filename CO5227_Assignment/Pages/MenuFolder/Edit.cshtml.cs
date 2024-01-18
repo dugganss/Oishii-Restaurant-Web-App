@@ -23,6 +23,8 @@ namespace CO5227_Assignment.Pages.MenuFolder
         [BindProperty]
         public MenuItems MenuItems { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile Image { get; set; }
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null || _context.MenuItemss == null)

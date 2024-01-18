@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CO5227_Assignment.Data;
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<CO5227_AssignmentContext>(options =>
@@ -34,6 +35,7 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
     DbInit.Initialise(context);
 }
+
 
 
 app.UseHttpsRedirection();

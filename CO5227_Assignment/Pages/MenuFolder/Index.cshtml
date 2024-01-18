@@ -35,6 +35,9 @@
                             }
                         </a>
                         <div>
+                            <h5>@Html.DisplayFor(modelItem => item.itemName)</h5>
+                        </div>
+                        <div>
                             <a asp-page="./Edit" asp-route-id="@item.itemID"><button>Edit</button></a> |
                             <a asp-page="./Details" asp-route-id="@item.itemID"><button>Details</button></a> |
                             <a asp-page="./Delete" asp-route-id="@item.itemID"><button>Delete</button></a>
