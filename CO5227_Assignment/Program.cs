@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using CO5227_Assignment.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<CO5227_AssignmentContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CO5227_AssignmentContext") ?? throw new InvalidOperationException("Connection string 'CO5227_AssignmentContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<CO5227_AssignmentContext>();
 
 //builder.Services.AddDatabasedeveloperPageExceptionFilter();
 
@@ -42,6 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
