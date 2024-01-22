@@ -25,7 +25,7 @@ namespace CO5227_Assignment.wwwroot.Models
         [Required, StringLength(5), Key]
         public string itemID { get; set; }
         
-        [Required, StringLength(20)]
+        [Required, StringLength(60)]
         public string itemName { get; set; }
         
         [StringLength(200)]

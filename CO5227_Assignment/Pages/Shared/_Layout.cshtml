@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Oishii Sushi</title>
-    <link rel="stylesheet" href="~/css/layout.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CO5227_Assignment.styles.css" asp-append-version="true" />
+    
 </head>
-<body id = "index_body">
+
+<body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow ">
             <div class="container">
@@ -29,6 +30,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-grey" asp-area="" asp-page="/Contact">Contact Us</a>
                         </li>
+                        @{
+                            var inAdminRole = User.IsInRole("Admin");
+                            if(inAdminRole){
+                                <li class="nav-item">
+                                    <a class="nav-link text-grey" asp-area="" asp-page="/adminPortal">Admin Portal</a>
+                                </li>
+                            }
+                        }
                         
                     </ul>
                     <li class="navbar-nav flex-grow-2">
@@ -40,63 +49,81 @@
             </div>
         </nav>
     </header>
-    <div>
-        <main  role="main" >
-            @RenderBody()
-        </main>
+    <div class="container container-fluid ">
+    <main>
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+    </main>
+
+
+
+
+
+
+
+
     </div>
-    
-
-    
-
-
-    
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
+        <footer id="footer" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top bg-black">
+            <div class="col pb-3 ">
+                <a class="text-decoration-none" asp-page="/Home"><h1 class="mx-5 text-white"><strong>oishii</strong></h1>  </a>
+                <a class="text-decoration-none" asp-page="/Home"><h1 class="mx-5 text-white"><strong>sushi</strong></h1>  </a>
+            </div>
+            <div class="col pb-3 ">
+            </div>
+
+
+            <div class="col pb-3 ">
+                <h5><strong class="text-white mx-5">Order</strong></h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/Home" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/userMenu" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/Basket" class="nav-link p-0 text-body-secondary text-decoration-none text-white">basket</a></li>
+                </ul>
+            </div>
+
+
+            <div class="col pb-3 ">
+                <h5><strong class="text-white mx-5">Manage</strong></h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/Contact" class="nav-link p-0 text-body-secondary text-decoration-none text-white">contact us</a></li>
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/About" class="nav-link p-0 text-body-secondary text-decoration-none text-white">about us</a></li>
+                    <li class="nav-item pb-2 mx-5"><a asp-page="/Login" class="nav-link p-0 text-body-secondary text-decoration-none text-white">log in</a></li>
+                </ul>
+            </div>
+    
+            @{
+        var isAdminRole = User.IsInRole("Admin");
+        if (isAdminRole)
+        {
+            <div class="col pb-3">
+                <h5><strong class="text-white mx-5">Admin</strong></h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item pb-2 mx-5 "><a asp-page="/adminPortal" class="nav-link p-0 text-body-secondary text-decoration-none text-white">admin portal</a></li>
+
+                </ul>
+            </div>
+        }
+    }
+
+            
+
+
+        </footer>
+
+
+    
+
+
 </html>
 
 
-<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top bg-black">
-       <div class="col pb-3 ">
-          <a class = "text-decoration-none" asp-page = "/Home"><h1 class ="mx-5 text-white"><strong>oishii</strong></h1>  </a>
-          <a class = "text-decoration-none" asp-page = "/Home"><h1 class ="mx-5 text-white"><strong>sushi</strong></h1>  </a>
-        </div>
-            <div class="col pb-3 ">
-            </div>
-
-
-            <div class="col pb-3 ">
-              <h5><strong class = "text-white mx-5">Order</strong></h5>
-              <ul class="nav flex-column">
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Home" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
-            <li class="nav-item pb-2 mx-5"><a asp-page="/userMenu" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Basket" class="nav-link p-0 text-body-secondary text-decoration-none text-white">basket</a></li>
-              </ul>
-            </div>
-
-
-            <div class="col pb-3 ">
-              <h5><strong class = "text-white mx-5">Manage</strong></h5>
-              <ul class="nav flex-column">
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Contact" class="nav-link p-0 text-body-secondary text-decoration-none text-white">contact us</a></li>
-                <li class="nav-item pb-2 mx-5"><a asp-page="/About" class="nav-link p-0 text-body-secondary text-decoration-none text-white">about us</a></li>
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Login" class="nav-link p-0 text-body-secondary text-decoration-none text-white">log in</a></li>
-              </ul>
-            </div>
-
-
-            <div class="col pb-3">
-              <h5><strong class = "text-white mx-5">Admin</strong></h5>
-              <ul class="nav flex-column">
-                <li class="nav-item pb-2 mx-5 "><a asp-page="#" class="nav-link p-0 text-body-secondary text-decoration-none text-white">admin access</a></li>
-
-              </ul>
-            </div>
-
-
-  </footer>

@@ -15,7 +15,7 @@
     <div class="container">
         @for (int i = 0; i < Model.MenuItems.Count; i += 2)
         {
-            <div class="row mb-4">
+                <div class="row mb-4">
                 @for (int j = i; j < i + 2 && j < Model.MenuItems.Count; j++)
                 {
                     var item = Model.MenuItems[j];

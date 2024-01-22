@@ -14,13 +14,12 @@
 
 </head>
 
-<body id ="bgcolor">
+<body class="h-100" id ="body">
 
     <!--  -->
 
     <div id = "image-container">
-        <a asp-page="/MenuFolder/Index"><button class="btn btn-dark btn-lg px-5 py-3 mt-3">Temporary Admin Menu Access</button></a>
-        <p class="text-black">(all other menu links direct to user view of menu)</p>
+        
         <img src="@Url.Content("~/img/oishiisushi_index_bg_img.jpg")" class="img-fluid pb-4" alt="Delicious sushi on a table" />
         <div id="main-image-text"><h1 id = "h1-font-size-increase"class="display-7" >Japanese Restaurant and Bar</h1></div>
     </div>
@@ -144,36 +143,7 @@
         </div>
     </div>
 
-    <div class="text-center">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                @foreach (var tblMenuItems in Model.MenuItem)
-                {
-                    <tr>
-                        <td>@tblMenuItems.itemID</td>
-                        <td>@tblMenuItems.itemName</td>
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-    </div>
-
-    <div class="d-flex p-3 bg-black text-white">
-        @foreach (var tblMenuItems in Model.MenuItem)
-        {
-            <div>
-                <p class="p-3">@Html.DisplayFor(modelItem => tblMenuItems.itemName)</p>
-            </div>
-        }
-    </div>
 
 
     
