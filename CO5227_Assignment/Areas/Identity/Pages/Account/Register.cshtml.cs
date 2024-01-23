@@ -113,8 +113,21 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                var userName = "";
+                for (int i = 0; i < Input.Email.Length; i++)
+                {
+                    if (Input.Email[i] != '@' && i == 0)
+                    {
+                        userName += Input.Email[i].ToString().ToUpper();
+                    }
+                    else if (Input.Email[i] != '@')
+                    {
+                        userName += Input.Email[i];
+                    }
+                    else { break; }
+                }
+                
+                await _userStore.SetUserNameAsync(user, userName, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

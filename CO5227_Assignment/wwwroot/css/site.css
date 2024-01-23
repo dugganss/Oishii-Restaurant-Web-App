@@ -15,10 +15,11 @@ html {
 
 #footer{
     max-width: 100.6%;
-    position:relative ;
+    position:absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
+    height: 400px;
 }
 
 body {
@@ -26,6 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-bottom: 400px
     
 }
 
@@ -33,9 +35,7 @@ main {
     flex: 1;
 }
 
-footer {
-    margin-top: auto; /* Push the footer to the bottom */
-}
+
 
 #title{
     font-family: 'Bradley Hand ITC', cursive !important;
