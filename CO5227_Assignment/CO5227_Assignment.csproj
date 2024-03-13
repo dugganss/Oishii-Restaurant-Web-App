@@ -6,12 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Models\Customer.cs" />
-    <Content Include="Models\CustomerOrder.cs" />
     <Content Include="Models\MenuItems.cs" />
-    <Content Include="Models\Order.cs" />
-    <Content Include="Models\Restaurant.cs" />
-    <Content Include="Models\Stock.cs" />
   </ItemGroup>
 
   <ItemGroup>

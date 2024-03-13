@@ -35,6 +35,15 @@ main {
     flex: 1;
 }
 
+#admin-footer-background{
+    background-color: black;
+}
+
+#manage-footer-background {
+    background-color: black;
+}
+
+
 
 
 #title{

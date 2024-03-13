@@ -18,6 +18,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using CO5227_Assignment.Data;
+using CO5227_Assignment.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CO5227_Assignment.Areas.Identity.Pages.Account
 {
@@ -30,12 +33,17 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private CO5227_AssignmentContext _db;
+        public CheckoutCustomer Customer = new CheckoutCustomer();
+        public Basket Basket = new Basket(); 
+
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            CO5227_AssignmentContext db)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +51,7 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _db = db;
         }
 
         /// <summary>
@@ -113,21 +122,21 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                var userName = "";
-                for (int i = 0; i < Input.Email.Length; i++)
-                {
-                    if (Input.Email[i] != '@' && i == 0)
-                    {
-                        userName += Input.Email[i].ToString().ToUpper();
-                    }
-                    else if (Input.Email[i] != '@')
-                    {
-                        userName += Input.Email[i];
-                    }
-                    else { break; }
-                }
+                //var userName = "";
+                //for (int i = 0; i < Input.Email.Length; i++)
+                //{
+                //    if (Input.Email[i] != '@' && i == 0)
+                //    {
+                //        userName += Input.Email[i].ToString().ToUpper();
+                //    }
+                //    else if (Input.Email[i] != '@')
+                //    {
+                //        userName += Input.Email[i];
+                //    }
+                //    else { break; }
+                //}
                 
-                await _userStore.SetUserNameAsync(user, userName, CancellationToken.None);
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -154,6 +163,9 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        NewBasket();
+                        NewCustomer(Input.Email);
+
                         return LocalRedirect(returnUrl);
                     }
                 }
@@ -166,6 +178,30 @@ namespace CO5227_Assignment.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
+        public void NewBasket()
+        {
+            var currentBasket = _db.Baskets.FromSqlRaw("SELECT * FROM Baskets").OrderByDescending(b =>  b.BasketID).FirstOrDefault(); 
+            if (currentBasket == null) {
+                Basket.BasketID = 1;
+            }
+            else
+            {
+                Basket.BasketID = currentBasket.BasketID+1;
+            }
+
+            _db.Baskets.Add(Basket);
+            _db.SaveChanges();
+        }
+
+        public void NewCustomer(string Email)
+        {
+            Customer.Email = Input.Email;
+            Customer.BasketID = Basket.BasketID;
+            _db.CheckoutCustomers.Add(Customer);
+            _db.SaveChanges();
+        }
+
 
         private IdentityUser CreateUser()
         {

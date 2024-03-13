@@ -1,5 +1,4 @@
 ﻿
 #hovering:hover {
     filter: brightness(70%);
-    content: "Hover Text";
 }
