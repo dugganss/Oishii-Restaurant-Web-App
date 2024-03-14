@@ -1,5 +1,5 @@
 ﻿@page
-@model CO5227_Assignment.Pages.userMenuModel
+@model CO5227_Assignment.Pages.AdminMenu.userMenuModel
 @{
 }
 <head>
@@ -21,7 +21,7 @@
                     var item = Model.MenuItems[j];
 
                     <div class="col-md-6 text-center">
-                        <a asp-page="/MenuFolder/Details" asp-route-id="@item.itemID">
+                        <a asp-page="/AdminMenu/Details" asp-route-id="@item.itemID">
                             @{
                                 try
                                 {
@@ -38,7 +38,14 @@
                             }
                         </a>
                         <div>
-                                <h5 >@Html.DisplayFor(modelItem => item.itemName)</h5>
+                            <ul>
+                                    <li><h5>@Html.DisplayFor(modelItem => item.itemName)</h5></li>
+                                    <form method="post">
+                                        <li><button type="submit" asp-page-handler="Buy" asp-route-itemID="@item.itemID">add to basket</button></li>
+                                    </form>
+                                    
+                            </ul>
+                                
                         </div>
                     </div>
                 }

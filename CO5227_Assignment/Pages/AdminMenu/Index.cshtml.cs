@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CO5227_Assignment.Data;
 using CO5227_Assignment.wwwroot.Models;
 
-namespace CO5227_Assignment.Pages.MenuFolder
+namespace CO5227_Assignment.Pages.AdminMenu
 {
     public class IndexModel : PageModel
     {
