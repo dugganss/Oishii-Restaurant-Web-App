@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using CO5227_Assignment.Models
+@using CO5227_Assignment.Data;
+@inject UserManager<IdentityUser> UserManager
+@inject CO5227_AssignmentContext Context
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,7 +31,7 @@
                             <a class="nav-link text-grey" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-grey" asp-area="" asp-page="/userMenu">Menu</a>
+                            <a class="nav-link text-grey" asp-area="" asp-page="/userMenuIndex">Menu</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-grey" asp-area="" asp-page="/Contact">Contact Us</a>
@@ -43,14 +49,33 @@
                     <li class="navbar-nav flex-grow-2">
                         <partial name="_LoginPartial" />
                         
-                        <a asp-page="/Checkout"><button class="btn btn-outline-secondary navbar-btn mt-2">Basket</button></a>
+
+                        @{
+                            //The below code will only display the basket button in the header if the user exists and is in the CheckoutCustomers table 
+                            //(admin isnt in this table)
+                            var user = await UserManager.GetUserAsync(User);
+                            if (user != null)
+                            {
+                                CheckoutCustomer customer = await Context.CheckoutCustomers.FindAsync(user.Email);
+                                if(customer!=null)
+                                {
+                                    <a asp-page="/Checkout"><button class="btn btn-outline-secondary navbar-btn mt-2">Basket</button></a>
+                                }
+                                
+                            }
+                        }
+                            
+                        
+                        
                     </li>
                 </div>
             </div>
         </nav>
     </header>
+    <p class="bg-warning text-center py-2"><strong>DISCLAIMERS</strong>: Admin does not have a basket (register to buy items), HTML/CSS validation is only available on admin account.</p>
     <div class="container container-fluid ">
     <main>
+        
         <div>
             <main role="main">
                 @RenderBody()
@@ -87,7 +112,7 @@
             <h5><strong class="text-white mx-5">Order</strong></h5>
             <ul class="nav flex-column">
                 <li class="nav-item pb-2 mx-5"><a asp-page="/Home" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
-                <li class="nav-item pb-2 mx-5"><a asp-page="/userMenu" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
+                <li class="nav-item pb-2 mx-5"><a asp-page="/userMenuIndex" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
                 <li class="nav-item pb-2 mx-5"><a asp-page="/Basket" class="nav-link p-0 text-body-secondary text-decoration-none text-white">basket</a></li>
             </ul>
         </div>
@@ -110,8 +135,8 @@
                     <h5><strong class="text-white mx-5">Admin</strong></h5>
                     <ul class="nav flex-column">
                         <li class="nav-item pb-2 mx-5 "><a asp-page="/adminPortal" class="nav-link p-0 text-body-secondary text-decoration-none text-white">admin portal</a></li>
-                        <li class="nav-item pb-2 mx-5 "><a href="https://validator.w3.org/nu/?doc=https%3A%2F%2F2228246.win.studentwebserver.co.uk%2FC05227" class="nav-link p-0 text-body-secondary text-decoration-none text-white">validate HTML</a></li>
-                        <li class="nav-item pb-2 mx-5 "><a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2F2228246.win.studentwebserver.co.uk%2FC05227+&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en" class="nav-link p-0 text-body-secondary text-decoration-none text-white">validate CSS</a></li>
+                        <li class="nav-item pb-2 mx-5 "><a href="https://validator.w3.org/nu/?doc=https%3A%2F%2F2228246.win.studentwebserver.co.uk%2FCO5227" class="nav-link p-0 text-body-secondary text-decoration-none text-white">validate HTML</a></li>
+                        <li class="nav-item pb-2 mx-5 "><a href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2F2228246.win.studentwebserver.co.uk%2FCO5227+&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en" class="nav-link p-0 text-body-secondary text-decoration-none text-white">validate CSS</a></li>
 
                     </ul>
                 </div>

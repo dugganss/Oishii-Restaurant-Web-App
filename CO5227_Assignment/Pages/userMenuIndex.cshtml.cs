@@ -12,10 +12,22 @@ namespace CO5227_Assignment.Pages.AdminMenu
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly CO5227_AssignmentContext _db;
+
+        [BindProperty]
+        public string Search {  get; set; }
+
+        public IList<MenuItems> MenuItems { get; set; } = default!;
+
         public userMenuModel(CO5227_AssignmentContext db,UserManager<IdentityUser> userManager)
         {
             _db = db;
             _userManager = userManager;
+        }
+
+        public IActionResult OnPostSearch()
+        {
+            MenuItems = _db.MenuItemss.FromSqlRaw("SELECT * FROM MenuItems Where itemName LIKE '" + Search +"%'").ToList();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostBuyAsync(string itemID)
@@ -59,7 +71,7 @@ namespace CO5227_Assignment.Pages.AdminMenu
         //    _context = context;
         //}
 
-        public IList<MenuItems> MenuItems { get; set; } = default!;
+        
 
         public async Task OnGetAsync()
         {

@@ -10,7 +10,7 @@
 <div class="text-center p-5">
     <h1 class="display-5">Checkout</h1>
 
-    @if (Model.Items.Count == 0)
+    @if (Model.Items.Count <1)
     {
         <p>Your basket is empty! Select items on the menu.</p>
     }

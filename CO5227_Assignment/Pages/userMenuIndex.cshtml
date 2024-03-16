@@ -1,0 +1,90 @@
+﻿@page
+@model CO5227_Assignment.Pages.AdminMenu.userMenuModel
+@{
+}
+
+@using Microsoft.AspNetCore.Identity
+@using CO5227_Assignment.Models
+@using CO5227_Assignment.Data;
+@inject UserManager<IdentityUser> UserManager
+@inject CO5227_AssignmentContext Context
+<head>
+    <link rel="stylesheet" href="~/css/userMenu.css" />
+</head>
+<body>
+
+
+    <div class="text-center p-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="px-5 mx-5"></div>
+
+            <div class="mb-3 mb-md-0">
+                <h1 class="display-5">Menu</h1>
+            </div>
+
+            <div>
+                <form method="post" class="d-flex flex-column flex-md-row align-items-center">
+                    <div class="mb-3 mb-md-0 me-md-3"><input asp-for="Search" />
+                        <button type="submit" asp-page-handler="Search">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        @for (int i = 0; i < Model.MenuItems.Count; i += 2)
+        {
+                <div class="row mb-4">
+                @for (int j = i; j < i + 2 && j < Model.MenuItems.Count; j++)
+                {
+                    var item = Model.MenuItems[j];
+
+                    <div class="col-md-6 text-center">
+                        <a asp-page="/AdminMenu/Details" asp-route-id="@item.itemID">
+                            @{
+                                try
+                                {
+                                    
+                                        <img id="hovering" class="img-fluid py-4" src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.imgData))" alt="@item.imgDescription" />
+                                        
+                                }
+                                catch
+                                {
+
+                                        <img id="hovering" class="img-fluid" src="~/img/noimg.png" alt="No image found" />
+                                    
+                                }
+                            }
+                        </a>
+                        <div>
+                            <ul class="list-unstyled">
+                                    <li><h5>@Html.DisplayFor(modelItem => item.itemName)</h5></li>
+                                    @{
+                                        //The below code will only display the add to basket button if the user exists and is in the CheckoutCustomers table
+                                        //(admin isnt in this table)
+                                        var user = await UserManager.GetUserAsync(User);
+                                        if (user != null)
+                                        {
+                                            CheckoutCustomer customer = await Context.CheckoutCustomers.FindAsync(user.Email);
+                                            if (customer != null)
+                                            {
+                                                <form method="post">
+                                                    <li><button type="submit" asp-page-handler="Buy" asp-route-itemID="@item.itemID">add to basket</button></li>
+                                                </form>
+                                            }
+
+                                        }
+                                    }
+                                    
+                                    
+                            </ul>
+                                
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+</body>
