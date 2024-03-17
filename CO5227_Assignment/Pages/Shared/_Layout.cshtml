@@ -113,7 +113,17 @@
             <ul class="nav flex-column">
                 <li class="nav-item pb-2 mx-5"><a asp-page="/Home" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
                 <li class="nav-item pb-2 mx-5"><a asp-page="/userMenuIndex" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Basket" class="nav-link p-0 text-body-secondary text-decoration-none text-white">basket</a></li>
+                @{
+                    var user1 = await UserManager.GetUserAsync(User);
+                    if (user1 != null)
+                    {
+                        CheckoutCustomer customer = await Context.CheckoutCustomers.FindAsync(user1.Email);
+                        if(customer!=null)
+                        {
+                            <li class="nav-item pb-2 mx-5"><a asp-page="/Checkout" class="nav-link p-0 text-body-secondary text-decoration-none text-white">basket</a></li>
+                        }
+                    }
+                    }
             </ul>
         </div>
 
