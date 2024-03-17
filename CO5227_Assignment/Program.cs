@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using CO5227_Assignment.Data;
 using Microsoft.AspNetCore.Identity;
 using CO5227_Assignment.Data;
+using CO5227_Assignment.Areas.Email.Interfaces;
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,7 @@ builder.Services.AddDbContext<CO5227_AssignmentContext>(options =>
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<CO5227_AssignmentContext>();
+builder.Services.AddTransient<CO5227_Assignment.Areas.Email.Interfaces.IEmailSender, CO5227_Assignment.Areas.Email.EmailSender>();
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(
 
