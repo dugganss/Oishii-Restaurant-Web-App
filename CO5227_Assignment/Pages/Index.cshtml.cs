@@ -23,10 +23,11 @@ namespace CO5227_Assignment.Pages
         //}
 
         public IList<MenuItems> signatures { get; set; } = default!;
+        public IList<MenuItems> allMenuItems { get; set; } = default!;
         public void OnGet()
         {
             signatures = _context.MenuItemss.FromSqlRaw("Select * From MenuItems WHERE special = 1").ToList();
-
+            allMenuItems = _context.MenuItemss.FromSqlRaw("Select * From MenuItems").ToList();
         }
     }
 }
