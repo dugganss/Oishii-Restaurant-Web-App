@@ -101,8 +101,8 @@
 <div>
     <footer id="footer" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top bg-black">
         <div class="col pb-3 ">
-            <a class="text-decoration-none" asp-page="/Home"><h1 class="mx-5 text-white"><strong>oishii</strong></h1>  </a>
-            <a class="text-decoration-none" asp-page="/Home"><h1 class="mx-5 text-white"><strong>sushi</strong></h1>  </a>
+            <a class="text-decoration-none" asp-page="/Index"><h1 class="mx-5 text-white"><strong>oishii</strong></h1>  </a>
+            <a class="text-decoration-none" asp-page="/Index"><h1 class="mx-5 text-white"><strong>sushi</strong></h1>  </a>
         </div>
         <div class="col pb-3 ">
         </div>
@@ -111,7 +111,7 @@
         <div class="col pb-3 ">
             <h5><strong class="text-white mx-5">Order</strong></h5>
             <ul class="nav flex-column">
-                <li class="nav-item pb-2 mx-5"><a asp-page="/Home" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
+                <li class="nav-item pb-2 mx-5"><a asp-page="/Index" class="nav-link p-0 text-body-secondary text-decoration-none text-white">home</a></li>
                 <li class="nav-item pb-2 mx-5"><a asp-page="/userMenuIndex" class="nav-link p-0 text-body-secondary text-decoration-none text-white">menu</a></li>
                 @{
                     var user1 = await UserManager.GetUserAsync(User);
