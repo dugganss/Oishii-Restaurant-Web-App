@@ -1,5 +1,10 @@
 ﻿@page
 @model CO5227_Assignment.Pages.AdminMenu.DetailsModel
+@using Microsoft.AspNetCore.Identity
+@using CO5227_Assignment.Models
+@using CO5227_Assignment.Data;
+@inject UserManager<IdentityUser> UserManager
+@inject CO5227_AssignmentContext Context
 
 @{
     ViewData["Title"] = "Details";
@@ -14,6 +19,28 @@
                 <ul>
                         <h3>Description</h3>
                         <p>@Model.MenuItems.description</p>
+
+                @{
+                    //The below code will only display the add to basket button if the user exists and is in the CheckoutCustomers table
+                    //(admin isnt in this table)
+                    var user = await UserManager.GetUserAsync(User);
+                    if (user != null)
+                    {
+                        CheckoutCustomer customer = await Context.CheckoutCustomers.FindAsync(user.Email);
+                        if (customer != null)
+                        {
+                            <form method="post">
+                                <button class="btn btn-dark btn-outline-light btn-sm px-5 py-3 my-3" type="submit" asp-page-handler="Buy" asp-route-itemID="@Model.MenuItems.itemID">Add to basket</button>
+                            </form>
+                        }
+
+                    }
+                    else
+                    {
+                        <p class="text-muted fst-italic py-3">Log in to buy!</p>
+                    }
+                }
+
                         <h4>£@Model.MenuItems.price</h4>
                 @if(Model.MenuItems.special == true)
                 {
@@ -25,15 +52,11 @@
                 @{
                     try
                     {
-
                         <img id="hovering" class="img-fluid py-4" src="@string.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(Model.MenuItems.imgData))" alt="@Model.MenuItems.imgDescription" />
-
                     }
                     catch
                     {
-
                         <img id="hovering" class="img-fluid" src="~/img/noimg.png" alt="No image found" />
-
                     }
                 }
             </div>

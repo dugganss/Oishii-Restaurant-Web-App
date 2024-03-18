@@ -20,8 +20,19 @@
 
             <div class="mb-3 mb-md-0">
                 <h1 class="display-5">Menu</h1>
+
+                @{
+                    //The below code will only display text to tell the user to log in if the user has no value
+                    //(admin isnt in this table)
+                    var user = await UserManager.GetUserAsync(User);
+                    if (user == null)
+                    {
+                        <h3 class="text-danger mt-3">Log in to purchase items!</h3>
+                    }
+                }
             </div>
 
+            
             <div>
                 <form method="post" class="d-flex flex-column flex-md-row align-items-center">
                     <div class="mb-3 mb-md-0 me-md-3"><input asp-for="Search" />
@@ -30,6 +41,10 @@
                 </form>
             </div>
         </div>
+
+
+        
+
     </div>
     
     <div class="container">
@@ -63,18 +78,19 @@
                                     @{
                                         //The below code will only display the add to basket button if the user exists and is in the CheckoutCustomers table
                                         //(admin isnt in this table)
-                                        var user = await UserManager.GetUserAsync(User);
+                                        
                                         if (user != null)
                                         {
                                             CheckoutCustomer customer = await Context.CheckoutCustomers.FindAsync(user.Email);
                                             if (customer != null)
                                             {
                                                 <form method="post">
-                                                    <li><button type="submit" asp-page-handler="Buy" asp-route-itemID="@item.itemID">add to basket</button></li>
+                                            <li><button class="btn btn-dark btn-outline-light px-3 py-1" type="submit" asp-page-handler="Buy" asp-route-itemID="@item.itemID">Add to basket</button></li>
                                                 </form>
                                             }
-
+                                            
                                         }
+                                    
                                     }
                                     
                                     

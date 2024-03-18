@@ -28,4 +28,18 @@
         <button class="py-2 px-3 my-3" type="submit" asp-page-handler="Submit">Submit</button>
         
     </form>
+    <div class="mb-4">
+        @{
+
+            if (Model.isSuccessful == true)
+            {
+                <em class="text-success">Your email was sent successfully!</em>
+            }
+            else if (Model.isSuccessful == false)
+            {
+                <em class="text-danger">Your email was not sent, please try again.</em>
+            }
+        }
+    </div>
+    
 </div>

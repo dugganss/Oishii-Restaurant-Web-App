@@ -13,6 +13,10 @@ namespace CO5227_Assignment.Pages
         public string Subject { get; set; }
         [BindProperty]
         public string Body { get; set; }
+
+        
+        public bool? isSuccessful = null;
+        
         
         public ContactModel(IEmailSender emailSender)
         {
@@ -22,8 +26,17 @@ namespace CO5227_Assignment.Pages
         
         public async Task<IActionResult> OnPostSubmitAsync()
         {
-            await _emailSender.SendEmailAsync(Email, Subject, Body);
-            return Page();
+            try
+            {
+                await _emailSender.SendEmailAsync(Email, Subject, Body);
+                isSuccessful = true;
+                return Page();
+            }catch (Exception ex)
+            {
+                isSuccessful = false;
+                return Page();
+            }
+            
         }
         public void OnGet()
         {

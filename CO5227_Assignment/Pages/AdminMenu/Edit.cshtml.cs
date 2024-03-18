@@ -23,8 +23,6 @@ namespace CO5227_Assignment.Pages.AdminMenu
         [BindProperty]
         public MenuItems MenuItems { get; set; } = default!;
 
-        [BindProperty]
-        public IFormFile Image { get; set; }
         public async Task<IActionResult> OnGetAsync(string id)
         {
             if (id == null || _context.MenuItemss == null)
@@ -37,12 +35,13 @@ namespace CO5227_Assignment.Pages.AdminMenu
             {
                 return NotFound();
             }
+
             MenuItems = menuitems;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -50,7 +49,24 @@ namespace CO5227_Assignment.Pages.AdminMenu
                 return Page();
             }
 
-            _context.Attach(MenuItems).State = EntityState.Modified;
+            var menuItemToUpdate = await _context.MenuItemss.FindAsync(MenuItems.itemID);
+
+            if (menuItemToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            //Change all values except image
+            MenuItems.imgData = menuItemToUpdate.imgData;
+            menuItemToUpdate.itemName = MenuItems.itemName;
+            menuItemToUpdate.description = MenuItems.description;
+            menuItemToUpdate.price = MenuItems.price;
+            menuItemToUpdate.category = MenuItems.category;
+            menuItemToUpdate.allergens = MenuItems.allergens;
+            menuItemToUpdate.dietryRequirements = MenuItems.dietryRequirements;
+            menuItemToUpdate.storeID = MenuItems.storeID;
+            menuItemToUpdate.special = MenuItems.special;
+            menuItemToUpdate.imgDescription = MenuItems.imgDescription;
 
             try
             {
@@ -70,6 +86,7 @@ namespace CO5227_Assignment.Pages.AdminMenu
 
             return RedirectToPage("./Index");
         }
+
 
         private bool MenuItemsExists(string id)
         {
