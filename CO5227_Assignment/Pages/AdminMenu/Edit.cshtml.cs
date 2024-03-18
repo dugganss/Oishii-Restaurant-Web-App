@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CO5227_Assignment.Data;
 using CO5227_Assignment.wwwroot.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CO5227_Assignment.Pages.AdminMenu
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly CO5227_Assignment.Data.CO5227_AssignmentContext _context;
