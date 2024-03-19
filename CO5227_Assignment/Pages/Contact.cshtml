@@ -40,23 +40,30 @@
                     }
                     else if (Model.isSuccessful == false)
                     {
-                                <em class="text-danger">Your email was not sent, please try again.</em>
+                        <em class="text-danger">Your email was not sent, please try again.</em>
                     }
                 }
             </div>
         </div>
         <div id="map" class="mb-5">
-            <script>
-                var map;
-                function initMap(){
+        @try
+        {
+                <script>
+                    var map;
+                    function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: 35.67401172282793, lng: 139.7715725798791 },
-                        zoom: 13
+                    center: { lat: 35.67401172282793, lng: 139.7715725798791 },
+                    zoom: 13
                     });
-                } 
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBgkTc3kdkWWbYuYe7p4OaLYZRQFIdFPU&callback=initMap"
-            async defer></script>
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBgkTc3kdkWWbYuYe7p4OaLYZRQFIdFPU&callback=initMap"
+                async defer></script>
+        }
+        finally
+        {
+                <img class="d-block w-100 border border-dark border-5" src="@Url.Content("~/img/mapImg.jpg")" alt="Static image of map, enable javascript to use">
+        }
         </div>
     </div>
     
