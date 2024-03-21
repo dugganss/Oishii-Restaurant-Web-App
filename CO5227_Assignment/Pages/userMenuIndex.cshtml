@@ -46,7 +46,7 @@
         
 
     </div>
-    
+    <!-- Organises items from menu into resizeable layout -->
     <div class="container">
         @for (int i = 0; i < Model.MenuItems.Count; i += 2)
         {
@@ -54,7 +54,7 @@
                 @for (int j = i; j < i + 2 && j < Model.MenuItems.Count; j++)
                 {
                     var item = Model.MenuItems[j];
-
+                    <!-- displays an image for an item if it exists otherwise show the default image -->
                     <div class="col-md-6 text-center">
                         <a asp-page="/AdminMenu/Details" asp-route-id="@item.itemID">
                             @{

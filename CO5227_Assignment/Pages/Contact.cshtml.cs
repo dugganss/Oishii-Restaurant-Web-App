@@ -26,6 +26,7 @@ namespace CO5227_Assignment.Pages
         
         public async Task<IActionResult> OnPostSubmitAsync()
         {
+            //Attempt to send email and set isSuccessful to track whether it was successfull or not
             try
             {
                 await _emailSender.SendEmailAsync(Email, Subject, Body);

@@ -16,7 +16,7 @@
 
 <body class="h-100" id ="body">
 
-    <!--  -->
+    <!-- Main image describing what restaurant is -->
 
     <div id = "image-container">
         
@@ -24,13 +24,13 @@
         <div id="main-image-text"><h1 id = "h1-font-size-increase"class="display-7" >Japanese Restaurant and Bar</h1></div>
     </div>
     
-    <!--  -->
+    <!-- section withh carousels for menu items and to learn more -->
 
     <div class="text-center">
     <h1 id = "spaced-heading" class="display-5 border-bottom border-dark border-2 pb-4">Discover Oishii</h1>
 </div>
 
-<!--  -->
+<!-- Carousel for menu -->
 
 <div class="d-flex">
     <div class="w-50 m-5 text-center">
@@ -43,6 +43,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
+                            <!-- Checks there are enough items in menu then displays image for 1st item if it exists -->
                         @if (Model.allMenuItems.Count >= 1)
                         {
                             <a asp-page="/AdminMenu/Details" asp-route-id="@Model.allMenuItems[0].itemID">
@@ -58,6 +59,7 @@
                         }
                     </div>
                     <div class="carousel-item">
+                            <!-- Checks there are enough items in menu then displays image for 2nd item if it exists -->
                         @if (Model.allMenuItems.Count >= 2)
                         {
                             <a asp-page="/AdminMenu/Details" asp-route-id="@Model.allMenuItems[1].itemID">
@@ -73,6 +75,7 @@
                         }
                     </div>
                     <div class="carousel-item">
+                            <!-- Checks there are enough items in menu then displays image for 3rd item if it exists -->
                         @if (Model.allMenuItems.Count >= 3)
                         {
                             <a asp-page="/AdminMenu/Details" asp-route-id="@Model.allMenuItems[2].itemID">
@@ -100,6 +103,7 @@
         </div>
         <a asp-page="/userMenuIndex"><button class="btn btn-dark btn-lg px-5 py-3 mt-3">Browse Menu</button></a>
     </div>
+        <!-- Carousel of static images for learn more -->
     <div class="w-50 m-5 text-center">
         <div class="fixed-height-carousel">
             <div id="carouselz" class="carousel slide" data-ride="carousel">
@@ -136,12 +140,11 @@
         <a asp-page="/About"><button class="btn btn-dark btn-lg px-5 py-3 mt-3" >Learn More</button></a>
     </div>
 </div>
-
-    <!--  -->
     <div class="text-center bg-black justify-content-center mb-5">
         <h1 id = "spaced-heading" class="display-5 pb-4 text-white pt-3 border-bottom border-white border-2 ">Our Signatures</h1>
          <div class="row mx-5 mt-5 py-3">
           <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <!-- Displays 5 signature items from the menu -->
                 @if(Model.signatures.Count >= 1)
                 {
                     <a asp-page="/AdminMenu/Details" asp-route-id="@Model.signatures[0].itemID">
@@ -201,7 +204,7 @@
                     </a>
                     
                 }
-                <a asp-page="/userMenuIndex"><button class="btn btn-outline-light btn-lg px-5 py-3 mb-5 mt-3">All Items Found On Our Menu!</button></a>
+                <button asp-page="/userMenuIndex" class="btn btn-outline-light btn-lg px-5 py-3 mb-5 mt-3">All Items Found On Our Menu!</button>
           </div>
 
           <div class="col-lg-4 mb-4 mb-lg-0">

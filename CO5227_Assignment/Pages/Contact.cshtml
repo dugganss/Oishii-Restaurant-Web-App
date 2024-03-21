@@ -10,6 +10,7 @@
     <h1 class="display-5 mb-3 pb-3">Contact</h1>
     <div class="d-flex justify-content-around">
         <div>
+            <!-- email form -->
             <form method="post">
 
                 <div class="form-group py-2 ">
@@ -45,9 +46,12 @@
                 }
             </div>
         </div>
+        <!-- Google maps API -->
         <div id="map" class="mb-5">
+           
         @try
         {
+                <!-- start of adapted code from Google, 2024 -->
                 <script>
                     var map;
                     function initMap() {
@@ -59,6 +63,7 @@
                 </script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBgkTc3kdkWWbYuYe7p4OaLYZRQFIdFPU&callback=initMap"
                 async defer></script>
+                <!-- end of adapted code -->
         }
         finally
         {

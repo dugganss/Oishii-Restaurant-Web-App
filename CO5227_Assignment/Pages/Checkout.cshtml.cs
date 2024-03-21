@@ -15,7 +15,6 @@ namespace CO5227_Assignment.Pages
         private readonly UserManager<IdentityUser> _userManager;
         public OrderHistory Order = new OrderHistory();
         public IList<CheckoutItem> Items { get; private set; }
-        //public int size;
 
         public decimal Total;
         public long AmountPayable;
@@ -40,12 +39,10 @@ namespace CO5227_Assignment.Pages
 
                 Total = 0;
 
-                //size = Items.Count;
+                
 
                 foreach (var item in Items)
                 {
-                    //item.quantity
-
                     Total += (item.quantity * (decimal)item.price);
                 }
                 AmountPayable = (long)Total;

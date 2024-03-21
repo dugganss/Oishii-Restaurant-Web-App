@@ -16,17 +16,13 @@ namespace CO5227_Assignment.Pages
             _context = context;
         }
 
-        //private readonly CO5227_AssignmentContext _context;
-
-        //public IndexModel(CO5227_AssignmentContext context) {
-        //_context = context;
-        //}
-
         public IList<MenuItems> signatures { get; set; } = default!;
         public IList<MenuItems> allMenuItems { get; set; } = default!;
         public void OnGet()
         {
+            //retrieves all special items from menuItems and saves it to signatures
             signatures = _context.MenuItemss.FromSqlRaw("Select * From MenuItems WHERE special = 1").ToList();
+            //retrieves all menuItems and saves it to allMenuItems
             allMenuItems = _context.MenuItemss.FromSqlRaw("Select * From MenuItems").ToList();
         }
     }
